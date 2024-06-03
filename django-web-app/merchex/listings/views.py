@@ -6,34 +6,8 @@ from listings.forms import ContactUsForm, BandForm, ContactUsForm
 from django.core.mail import send_mail
 from .forms import BandForm, ListingForm
 from django.contrib import messages
-
-def accueil(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/accueil.html', {'bands': bands})
-
-def entreprise(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/entreprise.html', {'bands': bands})
-
-def equipement(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/equipement.html', {'bands': bands})
-
-def reseau(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/reseau.html', {'bands': bands})
-
-def logiciel(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/logiciel.html', {'bands': bands})
-
-def contact(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/contact.html', {'bands': bands})
-
-def about(request):
-    bands = Band.objects.all()
-    return render(request, 'listings/about.html', {'bands': bands})
+from django.shortcuts import render
+from .models import Band
 
 def band_list(request):
    bands = Band.objects.all()
@@ -42,8 +16,8 @@ def band_list(request):
            {'bands': bands})
 
 def band_detail(request, id):
-   band = Band.objects.get(id=id)
-   return render(request,'listings/band_detail.html',{'band': band})
+    person = Band.objects.get(pk=id)
+    return render(request, 'band_detail.html', {'person': person})
 
 def listing_list(request):
     listings = Listing.objects.all()
