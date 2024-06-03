@@ -3,6 +3,14 @@ from django.urls import path
 from listings import views
 
 urlpatterns = [
+    path('accueil/', views.accueil, name='accueil'),
+    path('entreprise/', views.entreprise, name='entreprise'),
+    path('equipement/', views.equipement, name='equipement'),
+    path('reseau/', views.reseau, name='reseau'),
+    path('logiciel/', views.logiciel, name='logiciel'),
+    path('contact/', views.accueil, name='contact'),
+    path('about/', views.about, name='about'),
+
     path('admin/', admin.site.urls),
     path('bands/', views.band_list, name='band-list'),
     path('bands/<int:id>/', views.band_detail, name='band-detail'),

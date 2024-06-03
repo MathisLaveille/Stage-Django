@@ -7,6 +7,34 @@ from django.core.mail import send_mail
 from .forms import BandForm, ListingForm
 from django.contrib import messages
 
+def accueil(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/accueil.html', {'bands': bands})
+
+def entreprise(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/entreprise.html', {'bands': bands})
+
+def equipement(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/equipement.html', {'bands': bands})
+
+def reseau(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/reseau.html', {'bands': bands})
+
+def logiciel(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/logiciel.html', {'bands': bands})
+
+def contact(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/contact.html', {'bands': bands})
+
+def about(request):
+    bands = Band.objects.all()
+    return render(request, 'listings/about.html', {'bands': bands})
+
 def band_list(request):
    bands = Band.objects.all()
    return render(request,

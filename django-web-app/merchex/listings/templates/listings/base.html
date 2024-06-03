@@ -7,16 +7,19 @@
 
     </head>
     <body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'entreprise' %}">Entreprises</a></li>
+            <li><a href="{% url 'equipement' %}">Equipement entreprise</a></li>
+            <li><a href="{% url 'reseau' %}">Réseau entreprise</a></li>
+            <li><a href="{% url 'logiciel' %}">Logiciel entreprise</a></li>
+            <li><a href="{% url 'contact' %}">Contactez-nous</a></li>
+            <li><a href="{% url 'about' %}">À propos</a></li>
+        </ul>
+    </nav>
 
-   <nav>
-       <a href="{% url 'band-list' %}">Groupes</a>
-       <a href="{% url 'listing-list' %}">Ventes</a>
-       <a href="{% url 'contact' %}">Contactez-nous</a>
-       <a href="{% url 'about' %}">À propos</a>
-   </nav>
+    {% block content %}{% endblock %}
 
-   {% block content %}{% endblock %}
-
-    </body>
-
+</body>
 </html>
