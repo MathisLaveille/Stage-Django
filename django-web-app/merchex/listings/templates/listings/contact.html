@@ -3,12 +3,12 @@
 
 <h1>Contactez nous !</h1>
 
-<p>Nous sommes là pour vous aider.</p>
+<p>Nous sommes là pour vous aider.</p> <br>
 
 <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Envoyer">
+    <input class="styled" type="submit" value="Envoyer">
 </form>
 
 {% endblock %}

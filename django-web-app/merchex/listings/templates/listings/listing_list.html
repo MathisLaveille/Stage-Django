@@ -5,11 +5,11 @@
 
 {% block content %}
     <h1>Annonces</h1>
-    <a href="{% url 'listing-create' %}">Créer une nouvelle annonce</a>
+    <a href="{% url 'listing_create' %}">Créer une nouvelle annonce</a>
     <ul>
         {% for listing in listings %}
             <li>
-                {{ listing.title }} - <a href="{% url 'listing-update' listing.id %}">[modifier]</a> - <a href="{% url 'listing_delete' listing.id %}">[supprimer]</a>
+                {{ listing.title }} - <a href="{% url 'listing_update' listing.id %}">[modifier]</a> - <a href="{% url 'listing_delete' listing.id %}">[supprimer]</a>
             </li>
         {% endfor %}
     </ul>

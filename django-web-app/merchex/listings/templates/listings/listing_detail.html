@@ -13,8 +13,12 @@
 
 <p>{{ listing.description }}</p>
 
-<a href="{% url 'listing-update' listing.id %}">Modifier cette annonce</a>
-<a href="{% url 'listing-list' %}">Retourner à la liste des annonces</a>
-<a href="{% url 'listing_delete' listing.id %}">Supprimer cette annonce</a>
+<form action="{% url 'listing_update' listing.id %}">
+    <input class="styled_2" type="submit" value="Modifier cette annonce">
+</form>
+
+<form action="{% url 'listing_delete' listing.id %}">
+    <input class="styled_3" type="submit" value="Supprimer cette annonce">
+</form>
 
 {% endblock %}

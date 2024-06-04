@@ -2,14 +2,14 @@
 
 {% block content %}
   <h1>Groupes</h1>
-  <a href="{% url 'band-create' %}">Créer un nouveau groupe</a>
+  <a href="{% url 'band_create' %}">Créer un nouveau groupe</a>
   <ul>
     {% for band in bands %}
       {% if band.id %}
         <li>
-          <a href="{% url 'band-detail' band.id %}">{{ band.name }}</a>
-          - <a href="{% url 'band-update' band.id %}">[modifier]</a>
-          - <a href="{% url 'band-delete' band.id %}">[supprimer]</a>
+          <a href="{% url 'band_detail' band.id %}">{{ band.name }}</a>
+          - <a href="{% url 'band_update' band.id %}">[modifier]</a>
+          - <a href="{% url 'band_delete' band.id %}">[supprimer]</a>
         </li>
       {% endif %}
     {% endfor %}
