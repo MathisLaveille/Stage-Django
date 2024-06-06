@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Supprimer le site</h1>
+
+  <p>Êtes-vous sûr de vouloir supprimer ce site : {{ place.name }} ?</p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <input class="styled_3" type="submit" value="Supprimer">
+  </form>
+
+<form action="{% url 'place_detail' place.id %}">
+    <input class="styled" type="submit" value="Conserver">
+</form>
+
+{% endblock %}

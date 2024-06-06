@@ -1,0 +1,23 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Logiciel</title>
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+    </head>
+
+    <body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'accueil' %}">Accueil</a></li>
+            <li><a href="{% url 'place_list' %}">Place</a></li>
+            <li><a href="{% url 'typologie_list' %}">Typologie</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>
