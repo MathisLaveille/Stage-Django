@@ -2,11 +2,18 @@
 
 {% block content %}
 
+<a href="{% url 'equipment_list' %}">Equipement</a>
+
 <h2>{{ place.name }}</h2>
 
 <ul>
     <li>Nom: {{ place.name }}</li>
+    <li>Adresse : {{ place.place }}</li>
+    <li>Population: {{ place.population }}</li>
+    <li>Latitude : {{ place.latitude }}</li>
+    <li>Longitude: {{ place.longitude }}</li>
     <li>Description : {{ place.description }}</li>
+    <li>Typologie : {{ place.typologie.name }}</li>
 </ul>
 
 <form action="{% url 'place_update' place.id %}">

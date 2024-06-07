@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+<li><a href="{% url 'equipment_list' %}">Equipement</a></li>
+
+<title>Voici les différentes équipement : </title>
+
+{% render_table table %}
+
+<form action="{% url 'equipment_create' %}">
+    <input class="styled" type="submit" value="Ajouter un 2quipement">
+</form>
+
+{% endblock %}

@@ -19,33 +19,52 @@ class Place(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-'''class equipment(models.Model):
+class Brand(models.Model):
+    marque = models.fields.CharField(max_length=100)
+    description = models.fields.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'{self.marque}'
+
+class Provider(models.Model):
+    marque = models.fields.CharField(max_length=100)
+    description = models.fields.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'{self.marque}'
+
+class Type_connexion(models.Model):
     name = models.fields.CharField(max_length=100)
-    nbr = models.fields.IntegerField()
     description = models.CharField(max_length=1000)
-    eligibility = models.BooleanField(default=False)
+
+class Network(models.Model):
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
+    primary_type_connection = models.ForeignKey(Type_connexion, null=True, on_delete=models.SET_NULL)
+    primary_provider = models.ForeignKey(Provider, null=True, on_delete=models.SET_NULL)
+    primary_brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
+    secondary_type_connection = models.CharField(max_length=100, null=True, blank=True)
+    secondary_provider = models.CharField(max_length=100, null=True, blank=True)
+    secondary_brand = models.CharField(max_length=100, null=True, blank=True)
+    description = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'Network for {self.place.name}'
+
+class Type_equipment(models.Model):
+    name = models.fields.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
 
     def __str__(self):
         return f'{self.name}'
 
-class fournisseur(models.Model):
-    name = models.fields.CharField(max_length=100)
-    description = models.fields.CharField(max_length=1000)
+class Equipment(models.Model):
+
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
+    type_equipment = models.ForeignKey(Type_equipment, null=True, on_delete=models.SET_NULL)
+    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
+    quantity = models.IntegerField(default=0)
+    eligible = models.BooleanField(default=False)
+    description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return f'{self.name}'
-
-class fournisseur(models.Model):
-    name = models.fields.CharField(max_length=100)
-    description = models.fields.CharField(max_length=1000)
-
-class type_connexion(models.Model):
-    name = models.fields.CharField(max_length=100)
-
-class network(models.Model):
-    name_company = models.fields.CharField(max_length=100)
-    connection = models.fields.CharField(max_length=100)
-    connection_help = models.CharField(max_length=100)
-
-    description = models.CharField(max_length=1000)
-'''
+        return f'{self.type_equipment}'

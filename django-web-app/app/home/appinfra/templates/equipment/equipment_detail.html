@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<li><a href="{% url 'equipment_list' %}">Equipement</a></li>
+
+<h2>{{ equipment.type_equipment_id }}</h2>
+
+<ul>
+    <li>Entreprise: {{ equipment.place_id }}</li>
+    <li>Equipement: {{ equipment.type_equipment }}</li>
+    <li>Quantité : {{ equipment.quantity }}</li>
+    <li>Eligibilité: {{ equipment.eligible }}</li>
+    <li>Marque : {{ equipment.brand_id }}</li>
+    <li>Description : {{ equipment.description }}</li>
+</ul>
+
+<form action="{% url 'equipment_update' equipment.id %}">
+    <input class="styled_2" type="submit" value="Modifier ce site">
+</form>
+
+<form action="{% url 'equipment_delete' equipment.id %}">
+    <input class="styled_3" type="submit" value="Supprimer ce site">
+</form>
+
+{% endblock %}

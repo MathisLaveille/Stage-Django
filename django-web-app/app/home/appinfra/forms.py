@@ -1,6 +1,5 @@
 from django import forms
-from appinfra.models import Typologie
-from .models import Typologie, Place
+from .models import Typologie, Place, Type_connexion,Type_equipment, Brand, Provider, Equipment
 
 class ContactUsForm(forms.Form):
     name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Votre nom'}))
@@ -12,7 +11,32 @@ class TypologieForm(forms.ModelForm):
      model = Typologie
      fields = '__all__'
 
+class Type_connexionForm(forms.ModelForm):
+   class Meta:
+     model = Type_connexion
+     fields = '__all__'
+
+class Type_equipmentForm(forms.ModelForm):
+   class Meta:
+     model = Type_equipment
+     fields = '__all__'
+
+class EquipmentForm(forms.ModelForm):
+   class Meta:
+     model = Equipment
+     fields = '__all__'
+
+class ProviderForm(forms.ModelForm):
+   class Meta:
+     model = Provider
+     fields = '__all__'
+
 class PlaceForm(forms.ModelForm):
     class Meta:
         model = Place
+        fields = '__all__'
+
+class BrandForm(forms.ModelForm):
+    class Meta:
+        model = Brand
         fields = '__all__'

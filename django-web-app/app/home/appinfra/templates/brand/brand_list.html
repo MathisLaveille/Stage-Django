@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+
+<title>Voici les différentes marques  : </title>
+
+{% render_table table %}
+
+<form action="{% url 'brand_create' %}">
+    <input class="styled" type="submit" value="Créer une marque">
+</form>
+
+
+{% endblock %}

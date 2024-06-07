@@ -4,14 +4,21 @@
     <head>
         <title>Logiciel</title>
         <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
 
     <body>
     <nav>
         <ul>
             <li><a href="{% url 'accueil' %}">Accueil</a></li>
+
             <li><a href="{% url 'place_list' %}">Place</a></li>
             <li><a href="{% url 'typologie_list' %}">Typologie</a></li>
+            <li><a href="{% url 'provider_list' %}">Fournisseur</a></li>
+            <li><a href="{% url 'brand_list' %}">Marque</a></li>
+            <li><a href="{% url 'type_connexion_list' %}">Type de connexion</a></li>
+            <li><a href="{% url 'type_equipment_list' %}">type d'equipment</a></li>
+
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>

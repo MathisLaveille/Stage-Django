@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ type_connexion.name }}</h2>
+
+<ul>
+    <li>Nom: {{ type_connexion.name }}</li>
+    <li>Description : {{ type_connexion.description }}</li>
+</ul>
+
+<form action="{% url 'type_connexion_update' type_connexion.id %}">
+    <input class="styled_2" type="submit" value="Modifier ce type de connexion">
+</form>
+
+<form action="{% url 'type_connexion_delete' type_connexion.id %}">
+    <input class="styled_3" type="submit" value="Supprimer ce type de connexion">
+</form>
+
+{% endblock %}

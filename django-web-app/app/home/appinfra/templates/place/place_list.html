@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+
+<title>Voici les différentes sites : </title>
+
+{% render_table table %}
+
+<form action="{% url 'place_create' %}">
+    <input class="styled" type="submit" value="Ajouter un site">
+</form>
+
+{% endblock %}

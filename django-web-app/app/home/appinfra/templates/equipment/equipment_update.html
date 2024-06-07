@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<li><a href="{% url 'equipment_list' %}">Equipement</a></li>
+
+  <h1>Mise à jour de l'équipement'</h1>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="styled" type="submit" value="Envoyer">
+  </form>
+
+
+{% endblock %}

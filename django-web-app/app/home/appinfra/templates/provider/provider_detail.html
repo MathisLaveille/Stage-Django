@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ provider.marque }}</h2>
+
+<ul>
+    <li>Marque : {{ provider.marque }}</li>
+    <li>Description : {{ provider.description }}</li>
+</ul>
+
+<form action="{% url 'provider_update' provider.id %}">
+    <input class="styled_2" type="submit" value="Modifier ce fournisseur">
+</form>
+
+<form action="{% url 'provider_delete' provider.id %}">
+    <input class="styled_3" type="submit" value="Supprimer ce fournisseur">
+</form>
+
+{% endblock %}

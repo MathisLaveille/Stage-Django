@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>{{ brand.marque }}</h2>
+
+<ul>
+    <li>Marque : {{ brand.marque }}</li>
+    <li>Description : {{ brand.description }}</li>
+</ul>
+
+<form action="{% url 'brand_update' brand.id %}">
+    <input class="styled_2" type="submit" value="Modifier cette marque">
+</form>
+
+<form action="{% url 'brand_delete' brand.id %}">
+    <input class="styled_3" type="submit" value="Supprimer cette marque">
+</form>
+
+{% endblock %}

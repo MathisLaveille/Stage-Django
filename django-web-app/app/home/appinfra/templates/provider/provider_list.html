@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+{% block content %}
+
+<title>Voici les différent fournisseur  : </title>
+
+{% render_table table %}
+
+<form action="{% url 'provider_create' %}">
+    <input class="styled" type="submit" value="Créer un fournisseur">
+</form>
+
+{% endblock %}
