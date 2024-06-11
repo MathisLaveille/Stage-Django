@@ -1,7 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base_list_network_reseau_create.html' %}
+
+{% block navbar %}
+    <a href="{% url 'equipment_list' %}">Equipement</a>
+    <a href="{% url 'network_list' %}">Réseau</a>
+{% endblock navbar %}
 
 {% block content %}
-  <h1>Type de connexion</h1>
+  <h1>Réseau</h1>
 
   <form action="" method="post">
     {% csrf_token %}
@@ -12,7 +17,7 @@
   <form id="deleteForm" action="" method="post" style="margin-top: 20px;">
     {% csrf_token %}
     <input type="hidden" name="delete" value="true">
-    <input class="styled_3" type="button" value="Supprimer ce type de connexion" onclick="confirmDeletion();">
+    <input class="styled_3" type="button" value="Supprimer ce réseau" onclick="confirmDeletion();">
   </form>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -1,17 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base_create.html' %}
 
-{% block content %}
-<h1>Ajouter un nouveau type d'equipment</h1>
-
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form.non_field_errors }}
-  {% for field in form %}
-    <div class="form-group">
-      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-      {{ field }}
-    </div>
-  {% endfor %}
-  <button class="styled" type="submit" class="btn btn-primary">Ajouter</button>
-</form>
-{% endblock %}
+{% block name %}
+un type d'équipement
+{% endblock name %}

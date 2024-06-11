@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Typologie(models.Model):
     name = models.fields.CharField(max_length=100)
@@ -39,12 +40,18 @@ class Type_connexion(models.Model):
 
 class Network(models.Model):
     place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
-    primary_type_connection = models.ForeignKey(Type_connexion, null=True, on_delete=models.SET_NULL)
-    primary_provider = models.ForeignKey(Provider, null=True, on_delete=models.SET_NULL)
-    primary_brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
-    secondary_type_connection = models.CharField(max_length=100, null=True, blank=True)
-    secondary_provider = models.CharField(max_length=100, null=True, blank=True)
-    secondary_brand = models.CharField(max_length=100, null=True, blank=True)
+    type_connection = models.ForeignKey(Type_connexion, null=True, on_delete=models.SET_NULL)
+    provider = models.ForeignKey(Provider, null=True, on_delete=models.SET_NULL)
+    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
+
+    rank = models.IntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(9)
+        ]
+    )
+
+    rescue = models.BooleanField(default=False)
     description = models.CharField(max_length=1000)
 
     def __str__(self):
