@@ -78,17 +78,6 @@ class network_list(SingleTableView):
     table_class = NetworkTable
     template_name = 'network/network_list.html'
 
-class place_equipment_list(SingleTableView):
-    model = Equipment
-    table_class = EquipmentTable
-    template_name = 'place_equipment/place_equipment_list.html'
-
-
-class place_network_list(SingleTableView):
-    model = Network
-    table_class = NetworkTable
-    template_name = 'place_network/place_network_list.html'
-
 class provider_list(SingleTableView):
     model = Provider
     table_class = ProviderTable
@@ -196,36 +185,6 @@ def network_create(request):
                   'network/network_create.html',
                   {'form': form})
 
-def place_equipment_create(request):
-    if request.method == 'POST':
-        form = EquipmentForm(request.POST)
-
-        if form.is_valid():
-            place_equipment = form.save()
-            return redirect('place_equipment_update', place_equipment.id)
-
-    else:
-        form = EquipmentForm()
-
-    return render(request,
-                  'place_equipment/place_equipment_create.html',
-                  {'form': form})
-
-
-def place_network_create(request):
-    if request.method == 'POST':
-        form = NetworkForm(request.POST)
-
-        if form.is_valid():
-            place_network = form.save()
-            return redirect('place_network_update', place_network.id)
-
-    else:
-        form = NetworkForm()
-
-    return render(request,
-                  'place_network/place_network_create.html',
-                  {'form': form})
 
 def provider_create(request):
     if request.method == 'POST':
@@ -378,44 +337,6 @@ def network_update(request, id):
 
     return render(request, 'network/network_update.html', {'form': form, 'network': network})
 
-def place_equipment_update(request, id):
-    place_equipment = get_object_or_404(Equipment, id=id)
-
-    if request.method == 'POST':
-        if 'delete' in request.POST:
-            place_equipment.delete()
-            messages.success(request, f'Le type d\'équipement a été supprimé avec succès.')
-            return redirect('place_equipment_list')
-        else:
-            form = EquipmentForm(request.POST, instance=place_equipment)
-            if form.is_valid():
-                form.save()
-                messages.success(request, f'Le type d\'équipement a été mis à jour avec succès.')
-                return redirect('place_equipment_update', id=place_equipment.id)
-    else:
-        form = EquipmentForm(instance=place_equipment)
-
-    return render(request, 'place_equipment/place_equipment_update.html', {'form': form, 'place_equipment': place_equipment})
-
-
-def place_network_update(request, id):
-    place_network = get_object_or_404(Network, id=id)
-
-    if request.method == 'POST':
-        if 'delete' in request.POST:
-            place_network.delete()
-            messages.success(request, f'Le type d\'équipement "{place_network.type_connection}" qui était à la "{place_network.rank}" place a été supprimé avec succès.')
-            return redirect('network_list')
-        else:
-            form = NetworkForm(request.POST, instance=place_network)
-            if form.is_valid():
-                form.save()
-                messages.success(request, f'Le type d\'équipement "{place_network.type_connection}" qui était à la "{place_network.rank}" a été mis à jour avec succès.')
-                return redirect('place_network_update', id=place_network.id)
-    else:
-        form = NetworkForm(instance=place_network)
-
-    return render(request, 'place_network/place_network_update.html', {'form': form, 'place_network': place_network})
 
 
 def provider_update(request, id):
@@ -524,27 +445,6 @@ def network_delete(request, id):
 
     return render(request, 'network/network_delete.html', {'network': network})
 
-def place_equipment_delete(request, id):
-    place_equipment = get_object_or_404(Equipment, id=id)
-
-    if request.method == 'POST':
-        place_equipment.delete()
-        messages.success(request, f'Le type d équipement "{place_equipment.type_equipment}" a été supprimé avec succès.')
-        return redirect('place_equipment_list')
-
-    return render(request, 'place_equipment/place_equipment_delete.html', {'place_equipment': place_equipment})
-
-
-def place_network_delete(request, id):
-    place_network = get_object_or_404(Network, id=id)
-
-    if request.method == 'POST':
-        place_network.delete()
-        messages.success(request, f'Le type d équipement "{place_network.type_network}" a été supprimé avec succès.')
-        return redirect('place_network_list')
-
-    return render(request, 'place_network/place_network_delete.html', {'place_network': place_network})
-
 
 def provider_delete(request, id):
     provider = get_object_or_404(Provider, id=id)
@@ -596,15 +496,6 @@ def equipment(request):
 def network(request):
     networks = Network.objects.all()
     return render(request, 'network/network_list.html', {'networks': networks})
-
-def place_equipment(request):
-    place_equipments = Equipment.objects.all()
-    return render(request, 'place_equipment/place_equipment_list.html', {'place_equipments': place_equipments})
-
-
-def place_network(request):
-    place_networks = Network.objects.all()
-    return render(request, 'place_network/place_network_list.html', {'place_networks': place_networks})
 
 
 def provider(request):
