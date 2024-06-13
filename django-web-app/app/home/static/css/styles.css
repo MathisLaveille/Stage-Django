@@ -129,8 +129,32 @@ bbody {
     cursor: pointer;           /* Pointer/hand icon */
     border-radius: 12px;       /* Rounded corners */
     transition: background-color 0.3s; /* Transition effect for hover */
+}
+
+.refresh-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.container {
+    border: 1px solid black;
+    margin: 1% 1% 1% 1%;
+    background-color: ;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+  }
+  .styled, .styled_3 {
+    flex: 1;
   }
 
-  .refresh-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
+
+.swal2-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.swal2-icon.swal2-warning {
+    margin: auto;
+}

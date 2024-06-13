@@ -5,45 +5,53 @@
    <head>
        <title>Logiciel</title>
          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-       <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    </head>
 
 
-   <body>
-   <div class="ccontent">
-       <div class="nnavbar">
-           <!-- Liens directs vers les pages -->
-           <a href="{% url 'accueil' %}">Accueil</a>
-           <a href="{% url 'place_list' %}">Place</a>
+<body>
+     <div class="ccontent">
+         <div class="nnavbar">
 
-           {% block navbar %}{% endblock navbar %}
 
-           <!-- Menu déroulant pour "Page 2" -->
-           <div class="ddropdown">
-               <button class="dropbtn">Ajout</button>
-               <div class="ddropdown-content">
-                   <a href="{% url 'typologie_list' %}">Typologie</a>
-                   <a href="{% url 'provider_list' %}">Fournisseur</a>
-                   <a href="{% url 'brand_list' %}">Marque</a>
-                   <a href="{% url 'type_connexion_list' %}">Type de connexion</a>
-                   <a href="{% url 'type_equipment_list' %}">type d'equipment</a>
-               </div>
-           </div>
+             <!-- Liens directs vers les pages -->
+             <a href="{% url 'accueil' %}">Accueil</a>
+             <a href="{% url 'place_list' %}">Place</a>
 
-           <div class="ddropdown">
-               <button class="dropbtn">Autres</button>
-               <div class="ddropdown-content">
-                    <a href="{% url 'about' %}">About</a>
-                    <a href="{% url 'contact' %}">Contact</a>
-               </div>
-           </div>
+             {% block navbar %}{% endblock navbar %}
 
-       </div>
-   </div>
+             <!-- Menu déroulant pour "Page 2" -->
+             <div class="ddropdown">
+                 <button class="dropbtn">Ajout</button>
+                 <div class="ddropdown-content">
+                     <a href="{% url 'typologie_list' %}">Typologie</a>
+                     <a href="{% url 'provider_list' %}">Fournisseur</a>
+                     <a href="{% url 'brand_list' %}">Marque</a>
+                     <a href="{% url 'type_connexion_list' %}">Type de connexion</a>
+                     <a href="{% url 'type_equipment_list' %}">type d'equipment</a>
+                 </div>
+             </div>
 
-   {% block content %}{% endblock %}
+             <div class="ddropdown">
+                 <button class="dropbtn">Autres</button>
+                 <div class="ddropdown-content">
+                      <a href="{% url 'about' %}">About</a>
+                      <a href="{% url 'contact' %}">Contact</a>
+                 </div>
+             </div>
 
+         </div>
+     </div>
+
+<div class="container">
+     {% block content %}{% endblock %}
+</div>
 </body>
 </html>
 

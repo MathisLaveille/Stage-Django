@@ -75,7 +75,3 @@ class BrandForm(forms.ModelForm):
             'marque': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom de la marque'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
         }
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom de la typologie'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description'}),
-        }

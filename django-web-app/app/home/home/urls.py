@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.urls import path
-from appinfra import views
+from appinfra import views, models
 
 urlpatterns = [
+    path('articles/', views.article_list, name='article_list'),
+
     path('admin/', admin.site.urls),
     path('', views.accueil, name='accueil'),
 
@@ -13,6 +15,8 @@ urlpatterns = [
     path('place/', views.place_list.as_view(), name='place_list'),
     path('place/add/', views.place_create, name='place_create'),
     path('place/<int:id>/change/', views.place_update, name='place_update'),
+    path('place/<int:id>/equipments', views.equipment_list.as_view(source=models.Place), name='place_equipments'),
+    path('place/<int:id>/networks', views.network_list.as_view(source=models.Place), name='place_networks'),
 
     path('type_connexion/', views.type_connexion_list.as_view(), name='type_connexion_list'),
     path('type_connexion/add/', views.type_connexion_create, name='type_connexion_create'),

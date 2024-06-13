@@ -1,0 +1,49 @@
+{% load static %}
+
+
+<html>
+   <head>
+       <title>Logiciel</title>
+         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+       <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   </head>
+
+
+   <body>
+   <div class="ccontent">
+       <div class="nnavbar">
+           <!-- Liens directs vers les pages -->
+           <a href="{% url 'accueil' %}">Accueil</a>
+           <a href="{% url 'place_list' %}">Place</a>
+
+           {% block navbar %}{% endblock navbar %}
+
+           <!-- Menu déroulant pour "Page 2" -->
+           <div class="ddropdown">
+               <button class="dropbtn">Ajout</button>
+               <div class="ddropdown-content">
+                   <a href="{% url 'typologie_list' %}">Typologie</a>
+                   <a href="{% url 'provider_list' %}">Fournisseur</a>
+                   <a href="{% url 'brand_list' %}">Marque</a>
+                   <a href="{% url 'type_connexion_list' %}">Type de connexion</a>
+                   <a href="{% url 'type_equipment_list' %}">type d'equipment</a>
+               </div>
+           </div>
+
+           <div class="ddropdown">
+               <button class="dropbtn">Autres</button>
+               <div class="ddropdown-content">
+                    <a href="{% url 'about' %}">About</a>
+                    <a href="{% url 'contact' %}">Contact</a>
+               </div>
+           </div>
+
+       </div>
+   </div>
+
+   {% block content %}{% endblock %}
+
+</body>
+</html>
+

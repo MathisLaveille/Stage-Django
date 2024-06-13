@@ -1,22 +1,58 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.core.mail import send_mail
+from copy import copy
+
 from .forms import TypologieForm, PlaceForm, Type_connexionForm, ProviderForm, Type_equipmentForm, BrandForm, \
     EquipmentForm, NetworkForm, ContactUsForm
 from .tables import TypologieTable, PlaceTable, Type_connexionTable, ProviderTable, Type_equipmentTable, BrandTable, \
-    EquipmentTable, NetworkTable
+    NetworkTable, EquipmentTable
 from django_tables2 import SingleTableView
-from django.shortcuts import render, redirect
-from .models import Place, Type_connexion, Typologie, Provider, Type_equipment, Brand, Equipment, Network
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Place, Type_connexion, Typologie, Provider, Type_equipment, Brand, Equipment, Network, Article
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import Http404
+from django.utils.translation import gettext as _
+
+
+class mySingleTableView(SingleTableView):
+    source = None
+    request = None
+    parameters = None
+
+    def get_queryset(self):
+        queryset = None
+        source_id = self.parameters.get('id')
+        if self.source and source_id:
+            current_object = self.source.objects.filter(id=source_id).first()
+            if current_object:
+                dataset_name = '{}_set'.format(self.model._meta.model_name)
+                if hasattr(current_object, dataset_name):
+                    # queryset = current_object.network_set.all()
+                    # queryset = current_object.equipment_set.all()
+                    queryset = getattr(current_object, dataset_name).all()
+                else:
+                    queryset = super().get_queryset().filter(id__lt=0)
+            else:
+                queryset = super().get_queryset().filter(id__lt=0)
+        else:
+            queryset = super().get_queryset()
+        return queryset
+
+    def get(self, request, *args, **kwargs):
+        self.request = request
+        self.parameters = copy(kwargs)
+        return super().get(request, *args, **kwargs)
+
+
+def article_list(request):
+    published_articles = Article.published.all()
+    return render(request, 'article_list.html', {'articles': published_articles})
 
 
 def accueil(request):
     return render(request, 'autres/accueil.html')
 
 
-class typologie_list(SingleTableView):
+class typologie_list(mySingleTableView):
     model = Typologie
     table_class = TypologieTable
     template_name = 'typologie/typologie_list.html'
@@ -39,44 +75,18 @@ class type_equipment_list(SingleTableView):
     table_class = Type_equipmentTable
     template_name = 'type_equipment/type_equipment_list.html'
 
-    def get_queryset(self):
-        return super().get_queryset()
 
-    def get(self, request, *args, **kwargs):
-        self.object_list = self.get_queryset()
-        allow_empty = self.get_allow_empty()
-
-        if not allow_empty:
-            # When pagination is enabled and object_list is a queryset,
-            # it's better to do a cheap query than to load the unpaginated
-            # queryset in memory.
-            if self.get_paginate_by(self.object_list) is not None and hasattr(
-                    self.object_list, "exists"
-            ):
-                is_empty = not self.object_list.exists()
-            else:
-                is_empty = not self.object_list
-            if is_empty:
-                raise Http404(
-                    _("Empty list and “%(class_name)s.allow_empty” is False.")
-                    % {
-                        "class_name": self.__class__.__name__,
-                    }
-                )
-        context = self.get_context_data()
-        return self.render_to_response(context)
-
-
-class equipment_list(SingleTableView):
+class equipment_list(mySingleTableView):
     model = Equipment
     table_class = EquipmentTable
     template_name = 'equipment/equipment_list.html'
 
 
-class network_list(SingleTableView):
+class network_list(mySingleTableView):
     model = Network
     table_class = NetworkTable
     template_name = 'network/network_list.html'
+
 
 class provider_list(SingleTableView):
     model = Provider
@@ -112,14 +122,12 @@ def place_create(request):
 
         if form.is_valid():
             place = form.save()
-            return redirect('place_update', place.id)
+            return redirect('place_update', id=place.id)
 
     else:
         form = PlaceForm()
 
-    return render(request,
-                  'place/place_create.html',
-                  {'form': form})
+    return render(request,'place/place_create.html',{'form': form})
 
 
 def type_connexion_create(request):
@@ -160,15 +168,12 @@ def equipment_create(request):
 
         if form.is_valid():
             equipment = form.save()
-            return redirect('equipment_update', equipment.id)
+            return redirect('equipment_update', id=equipment.id)
 
     else:
         form = EquipmentForm()
 
-    return render(request,
-                  'equipment/equipment_create.html',
-                  {'form': form})
-
+    return render(request,'equipment/equipment_create.html',{'form': form})
 
 def network_create(request):
     if request.method == 'POST':
@@ -255,7 +260,8 @@ def place_update(request, id):
     else:
         form = PlaceForm(instance=place)
 
-    return render(request, 'place/place_update.html', {'form': form, 'place': place})
+    return render(request, 'place/place_update.html', {'form': form, 'this': place})
+
 
 def type_connexion_update(request, id):
     type_connexion = get_object_or_404(Type_connexion, id=id)
@@ -269,12 +275,14 @@ def type_connexion_update(request, id):
             form = Type_connexionForm(request.POST, instance=type_connexion)
             if form.is_valid():
                 form.save()
-                messages.success(request, f'Le type d\'équipement "{type_connexion.name}" a été mis à jour avec succès.')
+                messages.success(request,
+                                 f'Le type d\'équipement "{type_connexion.name}" a été mis à jour avec succès.')
                 return redirect('type_connexion_update', id=type_connexion.id)
     else:
         form = Type_connexionForm(instance=type_connexion)
 
-    return render(request, 'type_connexion/type_connexion_update.html', {'form': form, 'type_connexion': type_connexion})
+    return render(request, 'type_connexion/type_connexion_update.html',
+                  {'form': form, 'type_connexion': type_connexion})
 
 
 def type_equipment_update(request, id):
@@ -289,13 +297,14 @@ def type_equipment_update(request, id):
             form = Type_equipmentForm(request.POST, instance=type_equipment)
             if form.is_valid():
                 form.save()
-                messages.success(request, f'Le type d\'équipement "{type_equipment.name}" a été mis à jour avec succès.')
+                messages.success(request,
+                                 f'Le type d\'équipement "{type_equipment.name}" a été mis à jour avec succès.')
                 return redirect('type_equipment_update', id=type_equipment.id)
     else:
         form = Type_equipmentForm(instance=type_equipment)
 
-    return render(request, 'type_equipment/type_equipment_update.html', {'form': form, 'type_equipment': type_equipment})
-
+    return render(request, 'type_equipment/type_equipment_update.html',
+                  {'form': form, 'type_equipment': type_equipment})
 
 
 def equipment_update(request, id):
@@ -324,19 +333,20 @@ def network_update(request, id):
     if request.method == 'POST':
         if 'delete' in request.POST:
             network.delete()
-            messages.success(request, f'Le type d\'équipement "{network.type_connection}" qui était à la "{network.rank}" place a été supprimé avec succès.')
+            messages.success(request,
+                             f'Le type d\'équipement "{network.type_connection}" qui était à la "{network.rank}" place a été supprimé avec succès.')
             return redirect('network_list')
         else:
             form = NetworkForm(request.POST, instance=network)
             if form.is_valid():
                 form.save()
-                messages.success(request, f'Le type d\'équipement "{network.type_connection}" qui était à la "{network.rank}" a été mis à jour avec succès.')
+                messages.success(request,
+                                 f'Le type d\'équipement "{network.type_connection}" qui était à la "{network.rank}" a été mis à jour avec succès.')
                 return redirect('network_update', id=network.id)
     else:
         form = NetworkForm(instance=network)
 
     return render(request, 'network/network_update.html', {'form': form, 'network': network})
-
 
 
 def provider_update(request, id):
@@ -368,7 +378,7 @@ def brand_update(request, id):
             messages.success(request, f'Le type d\'équipement "{brand.marque}" a été supprimé avec succès.')
             return redirect('brand_list')
         else:
-            form =BrandForm(instance=brand)
+            form = BrandForm(instance=brand)
             if form.is_valid():
                 form.save()
                 messages.success(request,
@@ -379,6 +389,7 @@ def brand_update(request, id):
 
     return render(request, 'brand/brand_update.html',
                   {'form': form, 'brand': brand})
+
 
 def typologie_delete(request, id):
     typologie = get_object_or_404(Typologie, id=id)
