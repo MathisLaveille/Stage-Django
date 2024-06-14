@@ -6,38 +6,43 @@
        <title>Logiciel</title>
        <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
    </head>
 
 
 <body>
      <div class="ccontent">
-         <div class="nnavbar">
+        <div class="nnavbar">
 
 
              <!-- Liens directs vers les pages -->
-             <a href="{% url 'accueil' %}">Accueil</a>
-             <a href="{% url 'place_list' %}">Place</a>
+             <a href="{% url 'accueil' %}"><i class="fa-solid fa-house"></i> Accueil</a>
+
+             <a href="{% url 'place_list' %}"><i class="fa-solid fa-envelope"></i> Place</a>
 
              {% block navbar %}{% endblock navbar %}
 
              <!-- Menu déroulant pour "Page 2" -->
              <div class="ddropdown">
-                 <button class="dropbtn">Ajout</button>
+
+                 <button class="dropbtn"><i class="fa-solid fa-bars"></i> Ajout</button>
+
                  <div class="ddropdown-content">
-                     <a href="{% url 'typologie_list' %}">Typologie</a>
-                     <a href="{% url 'provider_list' %}">Fournisseur</a>
-                     <a href="{% url 'brand_list' %}">Marque</a>
-                     <a href="{% url 'type_connexion_list' %}">Type de connexion</a>
-                     <a href="{% url 'type_equipment_list' %}">type d'equipment</a>
+
+                     <a href="{% url 'typologie_list' %}"><i class="fa-solid fa-font-awesome"></i> Typologie</a>
+                     <a href="{% url 'provider_list' %}"><i class="fa-solid fa-truck-fast"></i> Fournisseur</a>
+                     <a href="{% url 'brand_list' %}"><i class="fa-solid fa-copyright"></i> Marque</a>
+                     <a href="{% url 'type_connexion_list' %}"><i class="fa-solid fa-wifi"></i> Type de connexion</a>
+                     <a href="{% url 'type_equipment_list' %}"><i class="fa-solid fa-screwdriver-wrench"></i> type d'equipment</a>
                  </div>
              </div>
 
              <div class="ddropdown">
-                 <button class="dropbtn">Autres</button>
+                 <button class="dropbtn"><i class="fa-solid fa-bars"></i> Autres</button>
                  <div class="ddropdown-content">
-                      <a href="{% url 'about' %}">About</a>
-                      <a href="{% url 'contact' %}">Contact</a>
+                      <a href="{% url 'about' %}"><i class="fa-solid fa-question"></i> About</a>
+                      <a href="{% url 'contact' %}"><i class="fa-solid fa-address-card"></i> Contact</a>
                  </div>
              </div>
 
