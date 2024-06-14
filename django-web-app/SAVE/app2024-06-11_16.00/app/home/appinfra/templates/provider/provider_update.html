@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Equipement</h1>
+  <h1>Fournisseur</h1>
 
   <form action="" method="post">
     {% csrf_token %}
@@ -12,7 +12,7 @@
   <form id="deleteForm" action="" method="post" style="margin-top: 20px;">
     {% csrf_token %}
     <input type="hidden" name="delete" value="true">
-    <input class="styled_3" type="button" value="Supprimer cet équipement" onclick="confirmDeletion();">
+    <input class="styled_3" type="button" value="Supprimer ce fournisseur" onclick="confirmDeletion();">
   </form>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

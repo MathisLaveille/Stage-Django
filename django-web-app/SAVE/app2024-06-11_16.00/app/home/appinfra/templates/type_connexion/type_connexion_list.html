@@ -1,0 +1,12 @@
+{% extends 'base_list.html' %}
+{% load render_table from django_tables2 %}
+
+{% block name %}
+type de connexions
+{% endblock name %}
+
+{% block type %}
+    <form action="{% url 'type_connexion_create' %}">
+        <input class="styled" type="submit" value="Créer un type de connexion">
+    </form>
+{% endblock type %}

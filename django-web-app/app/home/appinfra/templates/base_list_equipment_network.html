@@ -1,0 +1,28 @@
+{% load static %}
+{% load render_table from django_tables2 %}
+
+<html>
+   <head>
+       <title>Logiciel</title>
+       <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   </head>
+
+
+   <body>
+
+        <title>Voici les différent {% block name %}{% endblock name %} : </title>
+
+         {% render_table table %}
+
+         {% block type %}
+
+         {% endblock type %}
+
+</body>
+</html>
+
+
+</body>
+</html>
+

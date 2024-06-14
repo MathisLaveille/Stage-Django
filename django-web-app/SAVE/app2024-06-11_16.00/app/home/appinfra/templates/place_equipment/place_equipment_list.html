@@ -1,0 +1,17 @@
+{% extends 'base_list_network_reseau.html' %}
+{% load render_table from django_tables2 %}
+
+{% block navbar %}
+    <a href="{% url 'place_equipment_list' %}">Equipement</a>
+    <a href="{% url 'place_network_list' %}">Réseau</a>
+{% endblock navbar %}
+
+{% block name %}
+équipements
+{% endblock name %}
+
+{% block type %}
+    <form action="{% url 'place_equipment_create' %}">
+        <input class="styled" type="submit" value="Créer un équipement">
+    </form>
+{% endblock type %}

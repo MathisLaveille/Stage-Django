@@ -1,0 +1,12 @@
+{% extends 'base_list.html' %}
+{% load render_table from django_tables2 %}
+
+{% block name %}
+sites
+{% endblock name %}
+
+{% block type %}
+    <form action="{% url 'place_create' %}">
+        <input class="styled" type="submit" value="Créer un site">
+    </form>
+{% endblock type %}
