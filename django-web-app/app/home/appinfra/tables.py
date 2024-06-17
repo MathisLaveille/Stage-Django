@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Typologie, Place, Type_connexion, Provider, Type_equipment, Brand, Equipment, Network
+from .models import Typologie, Place, Type_connexion, Provider, Type_equipment, Brand, Equipment, Network, Platform, Software
 from django.urls import reverse
 
 class TypologieTable(tables.Table):
@@ -15,6 +15,14 @@ class Type_connexionTable(tables.Table):
 
     class Meta:
         model = Type_connexion
+        template_name = "django_tables2/bootstrap.html"
+        fields = ('name', 'description')
+
+class PlatformTable(tables.Table):
+    name = tables.LinkColumn('platform_update', args=[tables.A('pk')], verbose_name='Platforme')
+
+    class Meta:
+        model = Platform
         template_name = "django_tables2/bootstrap.html"
         fields = ('name', 'description')
 
@@ -41,6 +49,14 @@ class NetworkTable(tables.Table):
         model = Network
         template_name = "django_tables2/bootstrap.html"
         fields = ('type_connection','place', 'rank', 'rescue', 'brand', 'provider', 'description')
+
+class SoftwareTable(tables.Table):
+    name = tables.LinkColumn('software_update', args=[tables.A('pk')], verbose_name="Logiciel")
+
+    class Meta:
+        model = Software
+        template_name = "django_tables2/bootstrap.html"
+        fields = ('name','version', 'administrator', 'place', 'description', 'platform')
 
 class ProviderTable(tables.Table):
     marque = tables.LinkColumn('provider_update', args=[tables.A('pk')], verbose_name='Fournisseur')

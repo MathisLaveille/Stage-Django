@@ -1,12 +1,12 @@
 from copy import copy
 
 from .forms import TypologieForm, PlaceForm, Type_connexionForm, ProviderForm, Type_equipmentForm, BrandForm, \
-    EquipmentForm, NetworkForm, ContactUsForm
+    EquipmentForm, NetworkForm, ContactUsForm, PlatformForm, SoftwareForm
 from .tables import TypologieTable, PlaceTable, Type_connexionTable, ProviderTable, Type_equipmentTable, BrandTable, \
-    NetworkTable, EquipmentTable
+    NetworkTable, EquipmentTable, PlatformTable, SoftwareTable
 from django_tables2 import SingleTableView
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Place, Type_connexion, Typologie, Provider, Type_equipment, Brand, Equipment, Network, Article
+from .models import Place, Type_connexion, Typologie, Provider, Type_equipment, Brand, Equipment, Network, Platform, Software
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import Http404
@@ -26,8 +26,6 @@ class mySingleTableView(SingleTableView):
             if current_object:
                 dataset_name = '{}_set'.format(self.model._meta.model_name)
                 if hasattr(current_object, dataset_name):
-                    # queryset = current_object.network_set.all()
-                    # queryset = current_object.equipment_set.all()
                     queryset = getattr(current_object, dataset_name).all()
                 else:
                     queryset = super().get_queryset().filter(id__lt=0)
@@ -52,7 +50,7 @@ def accueil(request):
     return render(request, 'autres/accueil.html')
 
 
-class typologie_list(mySingleTableView):
+class typologie_list(SingleTableView):
     model = Typologie
     table_class = TypologieTable
     template_name = 'typologie/typologie_list.html'
@@ -69,12 +67,15 @@ class type_connexion_list(SingleTableView):
     table_class = Type_connexionTable
     template_name = 'type_connexion/type_connexion_list.html'
 
-
 class type_equipment_list(SingleTableView):
     model = Type_equipment
     table_class = Type_equipmentTable
     template_name = 'type_equipment/type_equipment_list.html'
 
+class platform_list(SingleTableView):
+    model = Platform
+    table_class = PlatformTable
+    template_name = 'platform/platform_list.html'
 
 class equipment_list(mySingleTableView):
     model = Equipment
@@ -86,6 +87,11 @@ class network_list(mySingleTableView):
     model = Network
     table_class = NetworkTable
     template_name = 'network/network_list.html'
+
+class software_list(mySingleTableView):
+    model = Software
+    table_class = SoftwareTable
+    template_name = 'software/software_list.html'
 
 
 class provider_list(SingleTableView):
@@ -161,6 +167,21 @@ def type_equipment_create(request):
                   'type_equipment/type_equipment_create.html',
                   {'form': form})
 
+def platform_create(request):
+    if request.method == 'POST':
+        form = PlatformForm(request.POST)
+
+        if form.is_valid():
+            platform = form.save()
+            return redirect('platform_update', platform.id)
+
+    else:
+        form = PlatformForm()
+
+    return render(request,
+                  'platform/platform_create.html',
+                  {'form': form})
+
 
 def equipment_create(request):
     if request.method == 'POST':
@@ -188,6 +209,21 @@ def network_create(request):
 
     return render(request,
                   'network/network_create.html',
+                  {'form': form})
+
+def software_create(request):
+    if request.method == 'POST':
+        form = SoftwareForm(request.POST)
+
+        if form.is_valid():
+            software = form.save()
+            return redirect('software_update', software.id)
+
+    else:
+        form = SoftwareForm()
+
+    return render(request,
+                  'software/software_create.html',
                   {'form': form})
 
 
@@ -306,6 +342,27 @@ def type_equipment_update(request, id):
     return render(request, 'type_equipment/type_equipment_update.html',
                   {'form': form, 'type_equipment': type_equipment})
 
+def platform_update(request, id):
+    platform = get_object_or_404(Platform, id=id)
+
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            platform.delete()
+            messages.success(request, f'Le type d\'équipement "{platform.name}" a été supprimé avec succès.')
+            return redirect('platform_list')
+        else:
+            form = PlatformForm(request.POST, instance=platform)
+            if form.is_valid():
+                form.save()
+                messages.success(request,
+                                 f'Le type d\'équipement "{platform.name}" a été mis à jour avec succès.')
+                return redirect('platform_update', id=platform.id)
+    else:
+        form = PlatformForm(instance=platform)
+
+    return render(request, 'platform/platform_update.html',
+                  {'form': form, 'platform': platform})
+
 
 def equipment_update(request, id):
     equipment = get_object_or_404(Equipment, id=id)
@@ -347,6 +404,25 @@ def network_update(request, id):
         form = NetworkForm(instance=network)
 
     return render(request, 'network/network_update.html', {'form': form, 'network': network})
+
+def software_update(request, id):
+    software = get_object_or_404(Software, id=id)
+
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            software.delete()
+            messages.success(request,f'')
+            return redirect('place_list')
+        else:
+            form = SoftwareForm(request.POST, instance=software)
+            if form.is_valid():
+                form.save()
+                messages.success(request,f'')
+                return redirect('software_update', id=software.id)
+    else:
+        form = SoftwareForm(instance=software)
+
+    return render(request, 'software/software_update.html', {'form': form, 'software': software})
 
 
 def provider_update(request, id):
@@ -434,6 +510,16 @@ def type_equipment_delete(request, id):
 
     return render(request, 'type_equipment/type_equipment_delete.html', {'type_equipment': type_equipment})
 
+def platform_delete(request, id):
+    platform = get_object_or_404(Platform, id=id)
+
+    if request.method == 'POST':
+        platform.delete()
+        messages.success(request, f'Le type d équipement "{platform.name}" a été supprimé avec succès.')
+        return redirect('platform_list')
+
+    return render(request, 'platform/platform_delete.html', {'platform': platform})
+
 
 def equipment_delete(request, id):
     equipment = get_object_or_404(Equipment, id=id)
@@ -455,6 +541,16 @@ def network_delete(request, id):
         return redirect('network_list')
 
     return render(request, 'network/network_delete.html', {'network': network})
+
+def software_delete(request, id):
+    software = get_object_or_404(Software, id=id)
+
+    if request.method == 'POST':
+        software.delete()
+        messages.success(request, f'')
+        return redirect('software_list')
+
+    return render(request, 'software/software_delete.html', {'software': software})
 
 
 def provider_delete(request, id):
@@ -498,6 +594,10 @@ def type_equipment(request):
     type_equipments = Type_equipment.objects.all()
     return render(request, 'type_equipment/type_equipment_list.html', {'type_equipments': type_equipments})
 
+def platform(request):
+    platforms = Platform.objects.all()
+    return render(request, 'platform/platform_list.html', {'platforms': platforms})
+
 
 def equipment(request):
     equipments = Equipment.objects.all()
@@ -507,6 +607,10 @@ def equipment(request):
 def network(request):
     networks = Network.objects.all()
     return render(request, 'network/network_list.html', {'networks': networks})
+
+def software(request):
+    softwares = Software.objects.all()
+    return render(request, 'software/software_list.html', {'softwares': softwares})
 
 
 def provider(request):
@@ -526,7 +630,6 @@ def about(request):
 def contact(request):
     if request.method == 'POST':
         form = ContactUsForm(request.POST)
-
         if form.is_valid():
             send_mail(
                 subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MerchEx Contact Us form',
@@ -534,14 +637,11 @@ def contact(request):
                 from_email=form.cleaned_data['email'],
                 recipient_list=['admin@merchex.xyz'],
             )
-        return redirect('email_sent')
-
+            return redirect('email_sent')
     else:
         form = ContactUsForm()
 
-    return render(request,
-                  'autres/contact.html',
-                  {'form': form})
+    return render(request, 'autres/contact.html', {'form': form})
 
 
 def email_sent(request):

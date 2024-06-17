@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-
 class Typologie(models.Model):
     name = models.fields.CharField(max_length=100)
     description = models.fields.CharField(max_length=1000)
@@ -94,11 +93,21 @@ class PublishedManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status='published')
 
+class Platform(models.Model):
+    name = models.fields.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
 
-class Article(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    status = models.CharField(max_length=20)
+    def __str__(self):
+        return f'{self.name}'
 
-    objects = models.Manager()  # Le gestionnaire par défaut
-    published = PublishedManager()
+
+class Software(models.Model):
+    name = models.fields.CharField(max_length=100)
+    version = models.CharField(max_length=100)
+    administrator = models.CharField(max_length=100)
+    platform = models.ForeignKey(Platform, null=True, on_delete=models.SET_NULL)
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
+    description = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return f'{self.name}'

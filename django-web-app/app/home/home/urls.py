@@ -17,6 +17,7 @@ urlpatterns = [
     path('place/<int:id>/change/', views.place_update, name='place_update'),
     path('place/<int:id>/equipments', views.equipment_list.as_view(source=models.Place), name='place_equipments'),
     path('place/<int:id>/networks', views.network_list.as_view(source=models.Place), name='place_networks'),
+    path('place/<int:id>/softwares', views.software_list.as_view(source=models.Place), name='place_softwares'),
 
     path('type_connexion/', views.type_connexion_list.as_view(), name='type_connexion_list'),
     path('type_connexion/add/', views.type_connexion_create, name='type_connexion_create'),
@@ -34,6 +35,10 @@ urlpatterns = [
     path('type_equipment/add/', views.type_equipment_create, name='type_equipment_create'),
     path('type_equipment/<int:id>/change/', views.type_equipment_update, name='type_equipment_update'),
 
+    path('platform/', views.platform_list.as_view(), name='platform_list'),
+    path('platform/add/', views.platform_create, name='platform_create'),
+    path('platform/<int:id>/change/', views.platform_update, name='platform_update'),
+
     path('equipment/', views.equipment_list.as_view(), name='equipment_list'),
     path('equipment/add/', views.equipment_create, name='equipment_create'),
     path('equipment/<int:id>/change/', views.equipment_update, name='equipment_update'),
@@ -41,6 +46,10 @@ urlpatterns = [
     path('network/', views.network_list.as_view(), name='network_list'),
     path('network/add/', views.network_create, name='network_create'),
     path('network/<int:id>/change/', views.network_update, name='network_update'),
+
+    path('software/', views.software_list.as_view(), name='software_list'),
+    path('software/add/', views.software_create, name='software_create'),
+    path('software/<int:id>/change/', views.software_update, name='software_update'),
 
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),

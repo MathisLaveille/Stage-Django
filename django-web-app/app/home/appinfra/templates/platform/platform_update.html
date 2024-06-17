@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Type de platforme</h1>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input class="styled" type="submit" value="Enregistrer">
+  </form>
+
+  <form id="deleteForm" action="" method="post" style="margin-top: 20px;">
+    {% csrf_token %}
+    <input type="hidden" name="delete" value="true">
+    <input class="styled_3" type="button" value="Supprimer ce type de plaforme" onclick="confirmDeletion();">
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript">
+    function confirmDeletion() {
+      Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimer !',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('deleteForm').submit();
+        }
+      });
+    }
+  </script>
+{% endblock %}

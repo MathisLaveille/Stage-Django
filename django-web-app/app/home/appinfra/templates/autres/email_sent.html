@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
+
 {% block content %}
-
-<h1>Merci !</h1>
-<p> Merci de votre retour !</p>
-
+  <h1>Email envoyé</h1>
+  <p>L'email a été envoyé avec succès. Merci de votre soumission.</p>
+  <a href="{% url 'accueil' %}">Retour à l'accueil</a>
 {% endblock %}
