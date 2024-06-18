@@ -8,7 +8,7 @@ EMAIL_HOST = 'mailhost.stgs.fr'
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'Mathis-LAVEILLE@sturno.fr'
-EMAIL_HOST_PASSWORD = 'GroupeSturno50@'
+EMAIL_HOST_PASSWORD = ''
 
 
 
