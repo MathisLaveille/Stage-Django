@@ -1,6 +1,8 @@
 from django import forms
 from .models import Typologie, Place, Type_connexion,Type_equipment, Brand, Provider, Equipment, Network, Platform, Software
 
+from django import forms
+
 class ContactUsForm(forms.Form):
     name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Votre nom'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Votre email'}))

@@ -40,12 +40,6 @@ class mySingleTableView(SingleTableView):
         self.parameters = copy(kwargs)
         return super().get(request, *args, **kwargs)
 
-
-def article_list(request):
-    published_articles = Article.published.all()
-    return render(request, 'article_list.html', {'articles': published_articles})
-
-
 def accueil(request):
     return render(request, 'autres/accueil.html')
 
@@ -642,7 +636,6 @@ def contact(request):
         form = ContactUsForm()
 
     return render(request, 'autres/contact.html', {'form': form})
-
 
 def email_sent(request):
     return render(request, 'autres/email_sent.html')

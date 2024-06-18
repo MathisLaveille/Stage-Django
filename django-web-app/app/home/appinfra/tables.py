@@ -35,12 +35,12 @@ class Type_equipmentTable(tables.Table):
         fields = ('name', 'description')
 
 class EquipmentTable(tables.Table):
-    type_equipment = tables.LinkColumn('equipment_update', args=[tables.A('pk')], verbose_name="Equipment")
+    name = tables.LinkColumn('equipment_update', args=[tables.A('pk')], verbose_name="nom-équipment")
 
     class Meta:
         model = Equipment
         template_name = "django_tables2/bootstrap.html"
-        fields = ('type_equipment','place', 'quantity', 'brand', 'eligible', 'description')
+        fields = ('name', 'type_equipment', 'place', 'quantity', 'brand', 'eligible', 'description', 'parent')
 
 class NetworkTable(tables.Table):
     type_connection = tables.LinkColumn('network_update', args=[tables.A('pk')], verbose_name="Connexion")

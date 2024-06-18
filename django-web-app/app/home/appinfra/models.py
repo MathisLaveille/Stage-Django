@@ -77,17 +77,6 @@ class Network(models.Model):
         return f'Network for {self.place.name}'
 
 
-class Equipment(models.Model):
-    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
-    type_equipment = models.ForeignKey(Type_equipment, null=True, on_delete=models.SET_NULL)
-    brand = models.ForeignKey(Brand, null=True, on_delete=models.SET_NULL)
-    quantity = models.IntegerField(default=0)
-    eligible = models.BooleanField(default=False)
-    description = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return f'{self.type_equipment}'
-
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -111,3 +100,18 @@ class Software(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class Equipment(models.Model):
+    name = models.fields.CharField(max_length=100)
+    place = models.ForeignKey(Place, null=True, on_delete=models.SET_NULL)
+    type_equipment = models.ForeignKey(Type_equipment, null=True, on_delete=models.SET_NULL)
+    brand = models.ForeignKey(Brand, null=True, blank=True, on_delete=models.SET_NULL)
+    quantity = models.IntegerField(default=0)
+    eligible = models.BooleanField(default=False)
+    description = models.CharField(max_length=1024 ,null=True, blank=True)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='children')
+
+    def __str__(self):
+        return f'{self.type_equipment}'
+
+

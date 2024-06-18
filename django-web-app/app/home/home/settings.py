@@ -1,14 +1,15 @@
 from django.middleware.clickjacking import XFrameOptionsMiddleware
-
+import os
 
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mathislaveille@gmail.com'
-EMAIL_HOST_PASSWORD = 'Mathis110605'
+EMAIL_HOST = 'mailhost.stgs.fr'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'Mathis-LAVEILLE@sturno.fr'
+EMAIL_HOST_PASSWORD = 'GroupeSturno50@'
+
 
 
 # X_FRAME_OPTIONS = 'ALLOW-FROM http://127.0.0.1:8001'

@@ -3,7 +3,6 @@ from django.urls import path
 from appinfra import views, models
 
 urlpatterns = [
-    path('articles/', views.article_list, name='article_list'),
 
     path('admin/', admin.site.urls),
     path('', views.accueil, name='accueil'),
