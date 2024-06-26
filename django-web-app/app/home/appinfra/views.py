@@ -3,20 +3,25 @@ from .forms import ContactUsForm
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 
+
 def accueil(request):
     return render(request, 'autres/accueil.html')
 
-class myTemplateView(TemplateView):
-    template_name = None; class_form = None; model = None; class_table = None; source = None; action = None
+
+class MyTemplateView(TemplateView):
+    template_name = None
+    class_form = None
+    model = None
+    class_table = None
+    source = None
+    action = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_object = None
 
         if self.action == "new":
-            current_object = self.model.objects.filter(id=kwargs.get('id')).first()
-            form = self.class_form(kwargs.get('POST'), instance=current_object)
-            context['current_object'] = current_object
+            form = self.class_form(kwargs.get('POST'))
             context['form'] = form
             return context
 
@@ -24,7 +29,7 @@ class myTemplateView(TemplateView):
             if self.class_table and self.source and kwargs.get('id'):
                 current_object = self.source.objects.filter(id=kwargs.get('id')).first()
                 if current_object:
-                    dataset_name = '{}_set'.format(self.model._meta.model_name)
+                    dataset_name = f'{self.model._meta.model_name}_set'
                     if hasattr(current_object, dataset_name):
                         object_list = getattr(current_object, dataset_name).all()
                     else:
@@ -32,17 +37,14 @@ class myTemplateView(TemplateView):
                 else:
                     object_list = super().get_queryset().filter(id__lt=0)
                 context['table'] = self.class_table(object_list)
-
             else:
                 current_object = self.model.objects.filter(id=kwargs.get('id')).first()
                 if kwargs.get('POST'):
                     form = self.class_form(kwargs.get('POST'), instance=current_object)
                 else:
                     form = self.class_form(instance=current_object)
-
                 context['current_object'] = current_object
                 context['form'] = form
-
         else:
             if self.class_table:
                 object_list = self.model.objects.all()
@@ -59,6 +61,9 @@ class myTemplateView(TemplateView):
             return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        if self.action == "new":
+            return self.create(request, *args, **kwargs)
+
         kwargs = request.resolver_match.kwargs
         kwargs['POST'] = request.POST
         context = self.get_context_data(**kwargs)
@@ -74,18 +79,21 @@ class myTemplateView(TemplateView):
         return redirect(f'{self.model._meta.model_name}_list')
 
     def create(self, request, *args, **kwargs):
-        if request.method == 'GET':
-            form = self.class_form(request.GET)
+        if request.method == 'POST':
+            form = self.class_form(request.POST)
             if form.is_valid():
                 obj = form.save()
                 return redirect(f'{self.model._meta.model_name}_update', obj.id)
         else:
             form = self.class_form()
 
-        return render(request, f'{self.model._meta.model_name}/{self.model._meta.model_name}_create.html',{'form': form})
+        return render(request, f'{self.model._meta.model_name}/{self.model._meta.model_name}_create.html',
+                      {'form': form})
+
 
 def about(request):
     return render(request, 'autres/about.html')
+
 
 def contact(request):
     if request.method == 'POST':
@@ -102,6 +110,7 @@ def contact(request):
         form = ContactUsForm()
 
     return render(request, 'autres/contact.html', {'form': form})
+
 
 def email_sent(request):
     return render(request, 'autres/email_sent.html')
