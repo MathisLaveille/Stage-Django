@@ -9,7 +9,7 @@
     <input class="styled" type="submit" value="Enregistrer">
   </form>
 
-  <form id="deleteForm" action="" method="post" style="margin-top: 20px;">
+  <form id="deleteForm" action="" method="delete" style="margin-top: 20px;">
     {% csrf_token %}
     <input type="hidden" name="delete" value="true">
     <input class="styled_3" type="button" value="Supprimer ce fournisseur" onclick="confirmDeletion();">

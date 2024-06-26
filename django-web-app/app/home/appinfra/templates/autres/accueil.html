@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% load i18n %}
 
-<h2>Accueil</h2>
+<h2>{% translate "Accueil" %}</h2>
 
 <img src="{% static 'images/sturno.jpg' %}" width=10% >
 <br><br>
+
+<h1>{% translate "Welcome to the Sturno Data Management Platform"%}
+</h1>
+
 <pre>
-    Bienvenue sur la Plateforme de Gestion de Données de la Sturno
+{% translate "Why Choose Our Solution:"%}
 
-Pourquoi Choisir Notre Solution :
+{% translate "-Our platform offers complete centralization of data, facilitating their access and management for"%}
+    {% translate "all authorized users."%}
 
-- Notre plateforme offre une centralisation complète des données, facilitant leur accès et leur gestion pour
-    tous les utilisateurs autorisés.
+</pre>
+
 
     <img src="{% static 'images/sturno2.webp' %}" width=40% >
 </pre>
-
 
 {% endblock %}

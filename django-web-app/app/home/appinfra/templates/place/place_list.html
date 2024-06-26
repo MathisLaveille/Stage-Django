@@ -1,5 +1,7 @@
 {% extends 'base_list.html' %}
 {% load render_table from django_tables2 %}
+{% load static %}
+{% load i18n %}
 
 {% block name %}
 sites
@@ -7,6 +9,6 @@ sites
 
 {% block type %}
     <form action="{% url 'place_create' %}">
-        <input class="styled" type="submit" value="Créer un site">
+        <input class="styled" type="submit" value="{% trans 'Create a site' %}">
     </form>
 {% endblock type %}

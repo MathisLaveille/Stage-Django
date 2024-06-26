@@ -1,6 +1,5 @@
-{% load static %}
 {% load render_table from django_tables2 %}
-
+{% load i18n static %}
 <html>
    <head>
        <title>Logiciel</title>
@@ -15,39 +14,36 @@
    <div class="ccontent">
        <div class="nnavbar">
 
+            <!-- Liens directs vers les pages -->
+            <a href="{% url 'accueil' %}"><i class="fa-solid fa-house"></i>{% trans " Welcome" %}</a>
 
-             <!-- Liens directs vers les pages -->
-             <a href="{% url 'accueil' %}"><i class="fa-solid fa-house"></i> Accueil</a>
+            <a href="{% url 'place_list' %}"><i class="fa-solid fa-envelope"></i>{% trans " Sites" %}</a>
 
-             <a href="{% url 'place_list' %}"><i class="fa-solid fa-envelope"></i> Place</a>
+            {% block navbar %}{% endblock navbar %}
 
-             {% block navbar %}{% endblock navbar %}
+            <!-- Menu déroulant pour "Addition" -->
+            <div class="ddropdown">
+                <button class="dropbtn"><i class="fa-solid fa-bars"></i>{% trans " Addition" %}</button>
+                <div class="ddropdown-content">
+                    <a href="{% url 'typologie_list' %}"><i class="fa-solid fa-font-awesome"></i>{% trans " Typology" %}</a>
+                    <a href="{% url 'provider_list' %}"><i class="fa-solid fa-truck-fast"></i>{% trans " Supplier" %}</a>
+                    <a href="{% url 'brand_list' %}"><i class="fa-solid fa-copyright"></i>{% trans " Brand" %}</a>
+                    <a href="{% url 'type_connexion_list' %}"><i class="fa-solid fa-wifi"></i>{% trans " Connection type" %}</a>
+                    <a href="{% url 'type_equipment_list' %}"><i class="fa-solid fa-screwdriver-wrench"></i>{% trans " Type of equipment" %}</a>
+                    <a href="{% url 'platform_list' %}"><i class="fa-solid fa-mobile-screen-button"></i>{% trans " Platform" %}</a>
+                </div>
+            </div>
 
-             <!-- Menu déroulant pour "Page 2" -->
-             <div class="ddropdown">
+            <!-- Menu déroulant pour "Others" -->
+            <div class="ddropdown">
+                <button class="dropbtn"><i class="fa-solid fa-bars"></i>{% trans " Others" %}</button>
+                <div class="ddropdown-content">
+                    <a href="{% url 'about' %}"><i class="fa-solid fa-question"></i>{% trans " About" %}</a>
+                    <a href="{% url 'contact' %}"><i class="fa-solid fa-address-card"></i>{% trans " Contact" %}</a>
+                </div>
+            </div>
 
-                 <button class="dropbtn"><i class="fa-solid fa-bars"></i> Ajout</button>
-
-                 <div class="ddropdown-content">
-
-                     <a href="{% url 'typologie_list' %}"><i class="fa-solid fa-font-awesome"></i> Typologie</a>
-                     <a href="{% url 'provider_list' %}"><i class="fa-solid fa-truck-fast"></i> Fournisseur</a>
-                     <a href="{% url 'brand_list' %}"><i class="fa-solid fa-copyright"></i> Marque</a>
-                     <a href="{% url 'type_connexion_list' %}"><i class="fa-solid fa-wifi"></i> Type de connexion</a>
-                     <a href="{% url 'type_equipment_list' %}"><i class="fa-solid fa-screwdriver-wrench"></i> type d'equipment</a>
-                     <a href="{% url 'platform_list' %}"><i class="fa-solid fa-mobile-screen-button"></i> Platforme</a>
-                 </div>
-             </div>
-
-             <div class="ddropdown">
-                 <button class="dropbtn"><i class="fa-solid fa-bars"></i> Autres</button>
-                 <div class="ddropdown-content">
-                      <a href="{% url 'about' %}"><i class="fa-solid fa-question"></i> About</a>
-                      <a href="{% url 'contact' %}"><i class="fa-solid fa-address-card"></i> Contact</a>
-                 </div>
-             </div>
-
-         </div>
+        </div>
    </div>
 
     <div class="container">

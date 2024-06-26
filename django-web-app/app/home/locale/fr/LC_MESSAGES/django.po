@@ -1,0 +1,429 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-21 09:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\home\appinfra\forms.py:7
+msgid "Your name"
+msgstr "Ton nom"
+
+#: .\home\appinfra\forms.py:7
+msgid "Name"
+msgstr "Nom"
+
+#: .\home\appinfra\forms.py:8
+msgid "Your email"
+msgstr "Ton email"
+
+#: .\home\appinfra\forms.py:9
+msgid "Your message"
+msgstr "Ton message"
+
+#: .\home\appinfra\forms.py:16
+msgid "Typology name"
+msgstr "Nom de la typologie"
+
+#: .\home\appinfra\forms.py:17
+msgid "Typology description"
+msgstr "Description de la typologie"
+
+#: .\home\appinfra\forms.py:25
+msgid "Connection type name"
+msgstr "Nom de la type de connexion"
+
+#: .\home\appinfra\forms.py:26
+msgid "Connection type description"
+msgstr "Description de la type de connexion"
+
+#: .\home\appinfra\forms.py:34
+msgid "Equipment type name"
+msgstr "Nom du type d'équipement"
+
+#: .\home\appinfra\forms.py:35
+msgid "Equipment type description"
+msgstr "Description du type d'équipement"
+
+#: .\home\appinfra\forms.py:43
+msgid "Platform name"
+msgstr "Nom de la plateforme"
+
+#: .\home\appinfra\forms.py:44
+msgid "Platform description"
+msgstr "Description de la plateforme"
+
+#: .\home\appinfra\forms.py:52
+msgid "Provider name"
+msgstr "Nom du fournisseur"
+
+#: .\home\appinfra\forms.py:53
+msgid "Provider description"
+msgstr "Description du fournisseur"
+
+#: .\home\appinfra\forms.py:61
+msgid "Brand name"
+msgstr "Nom de la marque"
+
+#: .\home\appinfra\forms.py:62
+msgid "Brand description"
+msgstr "Description de la marque"
+
+#: .\home\appinfra\forms.py:80
+msgid "Site name"
+msgstr "Nom du site"
+
+#: .\home\appinfra\forms.py:81
+msgid "Place name"
+msgstr "Adresse"
+
+#: .\home\appinfra\forms.py:82
+msgid "Population"
+msgstr "Population"
+
+#: .\home\appinfra\forms.py:84
+msgid "Latitude"
+msgstr "Latitude"
+
+#: .\home\appinfra\forms.py:85
+msgid "Longitude"
+msgstr "Longitude"
+
+#: .\home\appinfra\forms.py:86
+msgid "Place description"
+msgstr "Description du site"
+
+#: .\home\appinfra\forms.py:94
+msgid "Software name"
+msgstr "Nom du logiciel"
+
+#: .\home\appinfra\forms.py:95
+msgid "Version"
+msgstr "version"
+
+#: .\home\appinfra\forms.py:96
+msgid "Administrator name"
+msgstr "Nom de l'administrateur"
+
+#: .\home\appinfra\forms.py:99
+msgid "Software description"
+msgstr "Description du logiciel"
+
+#: .\home\appinfra\models.py:6 .\home\appinfra\models.py:14
+#: .\home\appinfra\models.py:43 .\home\appinfra\models.py:51
+#: .\home\appinfra\models.py:76 .\home\appinfra\models.py:84
+#: .\home\appinfra\models.py:95
+msgid "name"
+msgstr "nom"
+
+#: .\home\appinfra\models.py:7 .\home\appinfra\models.py:20
+#: .\home\appinfra\models.py:28 .\home\appinfra\models.py:36
+#: .\home\appinfra\models.py:44 .\home\appinfra\models.py:52
+#: .\home\appinfra\models.py:70 .\home\appinfra\models.py:77
+#: .\home\appinfra\models.py:89 .\home\appinfra\models.py:101
+msgid "description"
+msgstr "description"
+
+#: .\home\appinfra\models.py:15 .\home\appinfra\models.py:62
+#: .\home\appinfra\models.py:88 .\home\appinfra\models.py:96
+msgid "place"
+msgstr "adresse"
+
+#: .\home\appinfra\models.py:16
+msgid "population"
+msgstr "population"
+
+#: .\home\appinfra\models.py:17 .\home\appinfra\tables.py:7
+msgid "typology"
+msgstr "typologie"
+
+#: .\home\appinfra\models.py:18
+msgid "latitude"
+msgstr "latitude"
+
+#: .\home\appinfra\models.py:19
+msgid "longitude"
+msgstr "longitude"
+
+#: .\home\appinfra\models.py:27 .\home\appinfra\models.py:35
+#: .\home\appinfra\models.py:65 .\home\appinfra\models.py:98
+#: .\home\appinfra\tables.py:71
+msgid "brand"
+msgstr "marque"
+
+#: .\home\appinfra\models.py:63 .\home\appinfra\tables.py:47
+msgid "connection_type"
+msgstr "type de connexion"
+
+#: .\home\appinfra\models.py:64
+msgid "provider"
+msgstr "fournisseur"
+
+#: .\home\appinfra\models.py:67
+msgid "rank"
+msgstr "rang"
+
+#: .\home\appinfra\models.py:69
+msgid "rescue"
+msgstr "secour"
+
+#: .\home\appinfra\models.py:85
+msgid "version"
+msgstr "version"
+
+#: .\home\appinfra\models.py:86
+msgid "administrator"
+msgstr "administrateur"
+
+#: .\home\appinfra\models.py:87
+msgid "platform"
+msgstr "plateforme"
+
+#: .\home\appinfra\models.py:97
+msgid "type_equipment"
+msgstr "type équipement"
+
+#: .\home\appinfra\models.py:99
+msgid "quantity2"
+msgstr "quantité"
+
+#: .\home\appinfra\models.py:100
+msgid "eligible"
+msgstr "eligible"
+
+#: .\home\appinfra\models.py:102
+msgid "parent"
+msgstr "parent"
+
+#: .\home\appinfra\tables.py:15
+msgid "Connection type"
+msgstr "Type de connexion"
+
+#: .\home\appinfra\tables.py:23
+msgid "Platforme"
+msgstr "Plateforme"
+
+#: .\home\appinfra\tables.py:31
+msgid "Equipment type"
+msgstr "type équipement"
+
+#: .\home\appinfra\tables.py:39
+#: .\home\appinfra\templates\equipment\equipment_update.html:6
+msgid "equipment"
+msgstr "équipement"
+
+#: .\home\appinfra\tables.py:55
+msgid "Software"
+msgstr "Logiciel"
+
+#: .\home\appinfra\tables.py:63
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#: .\home\appinfra\tables.py:79
+msgid "Site"
+msgstr "Site"
+
+#: .\home\appinfra\templates\autres\about.html:6
+msgid "About"
+msgstr " A propos"
+
+#: .\home\appinfra\templates\autres\about.html:9
+msgid ""
+"Welcome to the page dedicated to our database management software designed "
+"to meet the needs of Sturno's IT systems."
+msgstr ""
+"Bienvenue sur la page dédiée à notre logiciel de gestion de base de données "
+"conçu pour répondre aux besoins des systèmes informatiques de Sturno."
+
+#: .\home\appinfra\templates\autres\about.html:13
+msgid "The software : "
+msgstr "Le logiciel"
+
+#: .\home\appinfra\templates\autres\about.html:15
+msgid ""
+"- Data centralization: Our software offers a centralized platform to "
+"efficiently manage all system-related data"
+msgstr ""
+"- Centralisation des données : Notre logiciel offre une plateforme "
+"centralisée pour gérer efficacement toutes les données liées au système"
+
+#: .\home\appinfra\templates\autres\about.html:16
+msgid ""
+"IT of Sturno and its partners. This allows for unified and consistent "
+"management of essential information."
+msgstr ""
+"informatique de Sturno et de ses partenaires. Cela permet une approche "
+"unifiée et cohérente de la gestion des informations essentielles."
+
+#: .\home\appinfra\templates\autres\about.html:19
+msgid "Benefits : "
+msgstr "Avantages : "
+
+#: .\home\appinfra\templates\autres\about.html:21
+msgid ""
+"- Process optimization: By centralizing data management, our software makes "
+"it possible to optimize operational processes, "
+msgstr ""
+"- Optimisation des processus : En centralisant la gestion des données, notre "
+"logiciel rend possible d'optimiser les processus, "
+
+#: .\home\appinfra\templates\autres\about.html:22
+msgid ""
+"thereby reducing downtime and inefficiencies. This results in improved "
+"productivity and overall performance."
+msgstr ""
+" réduisant ainsi les temps d'arrêt et les inefficacités. Cela se traduit par "
+"une amélioration de la productivité et performance de la globale."
+
+#: .\home\appinfra\templates\autres\about.html:25
+msgid ""
+"- Informed decision-making: Thanks to advanced analysis features, our "
+"software provides valuable information for decision-making"
+msgstr ""
+"- Prise de décision éclairée : Grâce à des fonctionnalités d'analyse "
+"avancées, notre logiciel fournit des informations précieuses pour la prise "
+"de décision"
+
+#: .\home\appinfra\templates\autres\about.html:26
+msgid ""
+"strategic decision. Consolidated data and personalized reports enable "
+"decision-makers to make informed and relevant decisions."
+msgstr "stratégique."
+
+#: .\home\appinfra\templates\autres\about.html:31
+msgid "Voici la structure de la base de donnée : "
+msgstr ""
+
+#: .\home\appinfra\templates\autres\accueil.html:6
+msgid "Accueil"
+msgstr ""
+
+#: .\home\appinfra\templates\autres\accueil.html:11
+msgid "Welcome to the Sturno Data Management Platform"
+msgstr "Bienvenue sur la plateforme de gestion de base de données Sturno"
+
+#: .\home\appinfra\templates\autres\accueil.html:15
+msgid "Why Choose Our Solution:"
+msgstr "Pourquoi choisir notre solution:"
+
+#: .\home\appinfra\templates\autres\accueil.html:17
+msgid ""
+"-Our platform offers complete centralization of data, facilitating their "
+"access and management for"
+msgstr ""
+"-Notre plateforme offre une centralisation complète des données, facilitant "
+"leuraccès et leur gestion pour"
+
+#: .\home\appinfra\templates\autres\accueil.html:18
+msgid "all authorized users."
+msgstr "tous les utilisateurs autorisés."
+
+#: .\home\appinfra\templates\autres\contact.html:6
+msgid "Contact us!"
+msgstr "Contacter nous!"
+
+#: .\home\appinfra\templates\base.html:20
+#: .\home\appinfra\templates\base_create.html:19
+#: .\home\appinfra\templates\base_list.html:18
+#: .\home\appinfra\templates\base_list_place.html:26
+msgid " Welcome"
+msgstr "Accueil"
+
+#: .\home\appinfra\templates\base.html:22
+#: .\home\appinfra\templates\base_create.html:21
+#: .\home\appinfra\templates\base_list.html:20
+#: .\home\appinfra\templates\base_list_place.html:28
+msgid " Sites"
+msgstr " Sites"
+
+#: .\home\appinfra\templates\base.html:28
+#: .\home\appinfra\templates\base_create.html:27
+#: .\home\appinfra\templates\base_list.html:26
+#: .\home\appinfra\templates\base_list_place.html:34
+msgid " Addition"
+msgstr "Ajouter"
+
+#: .\home\appinfra\templates\base.html:30
+#: .\home\appinfra\templates\base_create.html:29
+#: .\home\appinfra\templates\base_list.html:28
+#: .\home\appinfra\templates\base_list_place.html:36
+msgid " Typology"
+msgstr " Typologie"
+
+#: .\home\appinfra\templates\base.html:31
+#: .\home\appinfra\templates\base_create.html:30
+#: .\home\appinfra\templates\base_list.html:29
+#: .\home\appinfra\templates\base_list_place.html:37
+msgid " Supplier"
+msgstr " Fournisseur"
+
+#: .\home\appinfra\templates\base.html:32
+#: .\home\appinfra\templates\base_create.html:31
+#: .\home\appinfra\templates\base_list.html:30
+#: .\home\appinfra\templates\base_list_place.html:38
+msgid " Brand"
+msgstr " Marque"
+
+#: .\home\appinfra\templates\base.html:33
+#: .\home\appinfra\templates\base_create.html:32
+#: .\home\appinfra\templates\base_list.html:31
+#: .\home\appinfra\templates\base_list_place.html:39
+msgid " Connection type"
+msgstr " Type de connexion"
+
+#: .\home\appinfra\templates\base.html:34
+#: .\home\appinfra\templates\base_create.html:33
+#: .\home\appinfra\templates\base_list.html:32
+#: .\home\appinfra\templates\base_list_place.html:40
+msgid " Type of equipment"
+msgstr " Type équipement"
+
+#: .\home\appinfra\templates\base.html:35
+#: .\home\appinfra\templates\base_create.html:34
+#: .\home\appinfra\templates\base_list.html:33
+#: .\home\appinfra\templates\base_list_place.html:41
+msgid " Platform"
+msgstr " Plateforme"
+
+#: .\home\appinfra\templates\base.html:41
+#: .\home\appinfra\templates\base_create.html:40
+#: .\home\appinfra\templates\base_list.html:39
+#: .\home\appinfra\templates\base_list_place.html:47
+msgid " Others"
+msgstr " Autres"
+
+#: .\home\appinfra\templates\base.html:43
+#: .\home\appinfra\templates\base_create.html:42
+#: .\home\appinfra\templates\base_list.html:41
+#: .\home\appinfra\templates\base_list_place.html:49
+msgid " About"
+msgstr " A propos"
+
+#: .\home\appinfra\templates\base.html:44
+#: .\home\appinfra\templates\base_create.html:43
+#: .\home\appinfra\templates\base_list.html:42
+#: .\home\appinfra\templates\base_list_place.html:50
+msgid " Contact"
+msgstr " Contact"
+
+#: .\home\appinfra\templates\base_create.html:61
+msgid "Add"
+msgstr "Ajouter"
+
+#: .\home\appinfra\templates\place\place_list.html:12
+msgid "Create a site"
+msgstr "Créer un site"

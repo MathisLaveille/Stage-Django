@@ -1,54 +1,237 @@
 from django.contrib import admin
 from django.urls import path
-from appinfra import views, models
+from django.utils.translation import gettext as _
+from appinfra import views, models, forms, tables
 
 urlpatterns = [
+    # _____________________________________________BASE_________________________________________________________________
 
     path('admin/', admin.site.urls),
     path('', views.accueil, name='accueil'),
 
-    path('typologie/', views.typologie_list.as_view(), name='typologie_list'),
-    path('typologie/add/', views.typologie_create, name='typologie_create'),
-    path('typologie/<int:id>/change/', views.typologie_update, name='typologie_update'),
+    # _____________________________________________TYPOLOGIE____________________________________________________________
 
-    path('place/', views.place_list.as_view(), name='place_list'),
-    path('place/add/', views.place_create, name='place_create'),
-    path('place/<int:id>/change/', views.place_update, name='place_update'),
-    path('place/<int:id>/equipments', views.equipment_list.as_view(source=models.Place), name='place_equipments'),
-    path('place/<int:id>/networks', views.network_list.as_view(source=models.Place), name='place_networks'),
-    path('place/<int:id>/softwares', views.software_list.as_view(source=models.Place), name='place_softwares'),
+    path('typologie/', views.myTemplateView.as_view(
+        model=models.Typologie,
+        template_name='typologie/typologie_list.html',
+        class_table=tables.TypologieTable,
+    ), name='typologie_list'),
 
-    path('type_connexion/', views.type_connexion_list.as_view(), name='type_connexion_list'),
-    path('type_connexion/add/', views.type_connexion_create, name='type_connexion_create'),
-    path('type_connexion/<int:id>/change/', views.type_connexion_update, name='type_connexion_update'),
+    path('typologie/add/', views.myTemplateView.as_view(
+        model=models.Typologie,
+        template_name='typologie/typologie_create.html',
+        class_form=forms.TypologieForm,
+        action="new"
+    ), name='typologie_create'),
 
-    path('provider/', views.provider_list.as_view(), name='provider_list'),
-    path('provider/add/', views.provider_create, name='provider_create'),
-    path('provider/<int:id>/change/', views.provider_update, name='provider_update'),
+    path('typologie/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Typologie,
+        template_name="typologie/typologie_update.html",
+        class_form=forms.TypologieForm
+    ), name='typologie_update', kwargs={'title': _("typologie")}),
 
-    path('brand/', views.brand_list.as_view(), name='brand_list'),
-    path('brand/add/', views.brand_create, name='brand_create'),
-    path('brand/<int:id>/change/', views.brand_update, name='brand_update'),
+    # _____________________________________________PLACE________________________________________________________________
 
-    path('type_equipment/', views.type_equipment_list.as_view(), name='type_equipment_list'),
-    path('type_equipment/add/', views.type_equipment_create, name='type_equipment_create'),
-    path('type_equipment/<int:id>/change/', views.type_equipment_update, name='type_equipment_update'),
+    path('place/', views.myTemplateView.as_view(
+        model=models.Place,
+        template_name='place/place_list.html',
+        class_table=tables.PlaceTable,
+    ), name='place_list'),
 
-    path('platform/', views.platform_list.as_view(), name='platform_list'),
-    path('platform/add/', views.platform_create, name='platform_create'),
-    path('platform/<int:id>/change/', views.platform_update, name='platform_update'),
+    path('place/add/', views.myTemplateView.as_view(
+        model=models.Place,
+        template_name='place/place_create.html',
+        class_form=forms.PlaceForm
+    ), name='place_create'),
 
-    path('equipment/', views.equipment_list.as_view(), name='equipment_list'),
-    path('equipment/add/', views.equipment_create, name='equipment_create'),
-    path('equipment/<int:id>/change/', views.equipment_update, name='equipment_update'),
+    path('place/<int:id>/equipments/', views.myTemplateView.as_view(
+        model=models.Equipment,
+        template_name='equipment/equipment_list.html',
+        class_table=tables.EquipmentTable,
+        source=models.Place
+    ), name='place_equipments'),
 
-    path('network/', views.network_list.as_view(), name='network_list'),
-    path('network/add/', views.network_create, name='network_create'),
-    path('network/<int:id>/change/', views.network_update, name='network_update'),
+    path('place/<int:id>/networks/', views.myTemplateView.as_view(
+        model=models.Network,
+        template_name='network/network_list.html',
+        class_table=tables.NetworkTable,
+        source=models.Place
+    ), name='place_networks'),
 
-    path('software/', views.software_list.as_view(), name='software_list'),
-    path('software/add/', views.software_create, name='software_create'),
-    path('software/<int:id>/change/', views.software_update, name='software_update'),
+    path('place/<int:id>/softwares/', views.myTemplateView.as_view(
+        model=models.Software,
+        template_name='software/software_list.html',
+        class_table=tables.SoftwareTable,
+        source=models.Place
+    ), name='place_softwares'),
+
+    path('place/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Place,
+        template_name="place/place_update.html",
+        class_form=forms.PlaceForm
+    ), name='place_update', kwargs={'title': _("Place")}),
+
+    # _____________________________________________TYPE-CONNEXION_______________________________________________________
+
+    path('type_connexion/', views.myTemplateView.as_view(
+        model=models.Type_connexion,
+        template_name='type_connexion/type_connexion_list.html',
+        class_table=tables.Type_connexionTable,
+    ), name='type_connexion_list'),
+
+    path('type_connexion/add/', views.myTemplateView.as_view(
+        model=models.Type_connexion,
+        template_name='type_connexion/type_connexion_create.html',
+        class_form=forms.Type_connexionForm
+    ), name='type_connexion_create'),
+
+    path('type_connexion/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Type_connexion,
+        template_name="type_connexion/type_connexion_update.html",
+        class_form=forms.Type_connexionForm
+    ), name='type_connexion_update', kwargs={'title': _("type_connexion")}),
+
+    # _____________________________________________PROVIDER_____________________________________________________________
+
+    path('provider/', views.myTemplateView.as_view(
+        model=models.Provider,
+        template_name='provider/provider_list.html',
+        class_table=tables.ProviderTable,
+    ), name='provider_list'),
+
+    path('provider/add/', views.myTemplateView.as_view(
+        model=models.Provider,
+        template_name='provider/provider_create.html',
+        class_form=forms.ProviderForm
+    ), name='provider_create'),
+
+    path('provider/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Provider,
+        template_name="provider/provider_update.html",
+        class_form=forms.ProviderForm
+    ), name='provider_update', kwargs={'title': _("provider")}),
+
+    # _____________________________________________BRAND________________________________________________________________
+
+    path('brand/', views.myTemplateView.as_view(
+        model=models.Brand,
+        template_name='brand/brand_list.html',
+        class_table=tables.BrandTable,
+    ), name='brand_list'),
+
+    path('brand/add/', views.myTemplateView.as_view(
+        model=models.Brand,
+        template_name='brand/brand_create.html',
+        class_form=forms.BrandForm
+    ), name='brand_create'),
+
+    path('brand/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Brand,
+        template_name="brand/brand_update.html",
+        class_form=forms.BrandForm
+    ), name='brand_update', kwargs={'title': _("brand")}),
+
+    # _____________________________________________TYPE-EQUIPMENT_______________________________________________________
+
+    path('type_equipment/', views.myTemplateView.as_view(
+        model=models.Type_equipment,
+        template_name='type_equipment/type_equipment_list.html',
+        class_table=tables.Type_equipmentTable,
+    ), name='type_equipment_list'),
+
+    path('type_equipment/add/', views.myTemplateView.as_view(
+        model=models.Type_equipment,
+        template_name='type_equipment/type_equipment_create.html',
+        class_form=forms.Type_equipmentForm
+    ), name='type_equipment_create'),
+
+    path('type_equipment/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Type_equipment,
+        template_name="type_equipment/type_equipment_update.html",
+        class_form=forms.Type_equipmentForm
+    ), name='type_equipment_update', kwargs={'title': _("type_equipment")}),
+
+    # _____________________________________________PLATFORM_____________________________________________________________
+
+    path('platform/', views.myTemplateView.as_view(
+        model=models.Platform,
+        template_name='platform/platform_list.html',
+        class_table=tables.PlatformTable,
+    ), name='platform_list'),
+
+    path('platform/add/', views.myTemplateView.as_view(
+        model=models.Platform,
+        template_name='platform/platform_create.html',
+        class_form=forms.PlatformForm
+    ), name='platform_create'),
+
+    path('platform/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Platform,
+        template_name="platform/platform_update.html",
+        class_form=forms.PlatformForm
+    ), name='platform_update', kwargs={'title': _("platform")}),
+
+    # _____________________________________________EQUIPMENT____________________________________________________________
+
+    path('equipment/', views.myTemplateView.as_view(
+        model=models.Equipment,
+        template_name='equipment/equipment_list.html',
+        class_table=tables.EquipmentTable,
+    ), name='equipment_list'),
+
+    path('equipment/add/', views.myTemplateView.as_view(
+        model=models.Equipment,
+        template_name='equipment/equipment_create.html',
+        class_form=forms.EquipmentForm
+    ), name='equipment_create'),
+
+    path('equipment/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Equipment,
+        template_name="equipment/equipment_update.html",
+        class_form=forms.EquipmentForm
+    ), name='equipment_update', kwargs={'title': _("equipment")}),
+
+    # _____________________________________________NETWORK______________________________________________________________
+
+    path('network/', views.myTemplateView.as_view(
+        model=models.Network,
+        template_name='network/network_list.html',
+        class_table=tables.NetworkTable,
+    ), name='network_list'),
+
+    path('network/add/', views.myTemplateView.as_view(
+        model=models.Network,
+        template_name='network/network_create.html',
+        class_form=forms.NetworkForm
+    ), name='network_create'),
+
+    path('network/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Network,
+        template_name="network/network_update.html",
+        class_form=forms.NetworkForm
+    ), name='network_update', kwargs={'title': _("network")}),
+
+    # _____________________________________________SOFTWARE_____________________________________________________________
+
+    path('software/', views.myTemplateView.as_view(
+        model=models.Software,
+        template_name='software/software_list.html',
+        class_table=tables.SoftwareTable,
+    ), name='software_list'),
+
+    path('software/add/', views.myTemplateView.as_view(
+        model=models.Software,
+        template_name='software/software_create.html',
+        class_form=forms.SoftwareForm
+    ), name='software_create'),
+
+    path('software/<int:id>/change/', views.myTemplateView.as_view(
+        model=models.Software,
+        template_name="software/software_update.html",
+        class_form=forms.SoftwareForm
+    ), name='software_update', kwargs={'title': _("software")}),
+
+    # _____________________________________________MORE_________________________________________________________________
 
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),

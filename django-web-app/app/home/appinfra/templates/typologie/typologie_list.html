@@ -6,7 +6,7 @@ es typologies
 {% endblock name %}
 
 {% block type %}
-    <form action="{% url 'typologie_create' %}">
+    <form action="{% url 'typologie_create' %}" method="get">
         <input class="styled" type="submit" value="Créer une typologie">
     </form>
 {% endblock type %}
