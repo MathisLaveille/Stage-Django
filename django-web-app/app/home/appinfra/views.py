@@ -1,7 +1,12 @@
 from django.views.generic import TemplateView
-from .forms import ContactUsForm
-from django.core.mail import send_mail
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext as _
+from django.core.mail import send_mail
+from .forms import ContactUsForm, CustomUserCreationForm, CustomAuthenticationForm
 
 
 def accueil(request):
@@ -114,3 +119,46 @@ def contact(request):
 
 def email_sent(request):
     return render(request, 'autres/email_sent.html')
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, _('Inscription réussie ! Vous êtes maintenant connecté.'))
+            return redirect('accueil')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'authentication/register.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, _('Vous êtes maintenant connecté.'))
+            return redirect('accueil')
+    else:
+        form = CustomAuthenticationForm()
+    return render(request, 'authentication/login.html', {'form': form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, _('Vous avez été déconnecté.'))
+    return redirect('accueil')
+
+
+@method_decorator(login_required, name='dispatch')
+class UserProfileView(TemplateView):
+    template_name = 'authentication/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context

@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from .models import Typologie, Place, Type_connexion, Type_equipment, Brand, Provider, Equipment, Network, Platform, Software
-from django import forms
+from .models import Typologie, Place, Type_connexion, Type_equipment, Brand, Provider, Equipment, Network, Platform, Software, CustomUser
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class ContactUsForm(forms.Form):
     name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Your name')}), label=_('Name'))
@@ -98,3 +98,18 @@ class SoftwareForm(forms.ModelForm):
             'place': forms.Select(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': _('Software description')}),
         }
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ('username', 'email', 'role', 'phone_number', 'password1', 'password2')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Nom d\'utilisateur')}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': _('Adresse email')}),
+            'role': forms.Select(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Numéro de téléphone')}),
+        }
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Nom d\'utilisateur')}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Mot de passe')}))

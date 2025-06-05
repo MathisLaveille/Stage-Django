@@ -1,9 +1,28 @@
 from django.contrib import admin
 from django.urls import path
 from django.utils.translation import gettext as _
+from django.conf import settings
+from django.conf.urls.static import static
 from appinfra import views, models, forms, tables
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    # _____________________________________________AUTH_________________________________________________________________
+
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('profile/', views.UserProfileView.as_view(), name='profile'),
+
+    path('password_change/', auth_views.PasswordChangeView.as_view(
+        template_name='authentication/password_change.html',
+        success_url='/profile/'
+    ), name='password_change'),
+
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(
+        template_name='authentication/password_change_done.html'
+    ), name='password_change_done'),
+
     # _____________________________________________BASE_________________________________________________________________
 
     path('admin/', admin.site.urls),
@@ -139,20 +158,20 @@ urlpatterns = [
 
     path('type_equipment/', views.MyTemplateView.as_view(
         model=models.Type_equipment,
-        template_name='type_equipment/type_equipment_list.html',
+        template_name='type_equipment/type-equipment_list.html',
         class_table=tables.Type_equipmentTable,
     ), name='type_equipment_list'),
 
     path('type_equipment/add/', views.MyTemplateView.as_view(
         model=models.Type_equipment,
-        template_name='type_equipment/type_equipment_create.html',
+        template_name='type_equipment/type-equipment_create.html',
         class_form=forms.Type_equipmentForm,
         action = "new"
     ), name='type_equipment_create'),
 
     path('type_equipment/<int:id>/change/', views.MyTemplateView.as_view(
         model=models.Type_equipment,
-        template_name="type_equipment/type_equipment_update.html",
+        template_name="type_equipment/type-equipment_update.html",
         class_form=forms.Type_equipmentForm
     ), name='type_equipment_update', kwargs={'title': _("type_equipment")}),
 
@@ -246,3 +265,8 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('email_sent/', views.email_sent, name='email_sent'),
 ]
+
+# Ajout des URLs pour servir les fichiers média en développement
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

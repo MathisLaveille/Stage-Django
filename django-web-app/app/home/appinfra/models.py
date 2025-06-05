@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 
 class Typologie(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('name'))
@@ -103,3 +105,37 @@ class Equipment(models.Model):
 
     def __str__(self):
         return f'{self.type_equipment}'
+
+# Model pour la gestion des utilisateurs
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = [
+        ('ADMIN', 'Administrateur'),
+        ('USER', 'Utilisateur standard'),
+        ('GUEST', 'Invité'),
+    ]
+    
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='USER',
+        verbose_name=_('Rôle')
+    )
+    
+    phone_number = models.CharField(
+        max_length=15,
+        blank=True,
+        null=True,
+        verbose_name=_('Numéro de téléphone')
+    )
+    
+    date_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_('Date de modification')
+    )
+
+    class Meta:
+        verbose_name = _('Utilisateur')
+        verbose_name_plural = _('Utilisateurs')
+
+    def __str__(self):
+        return f"{self.username} ({self.get_role_display()})"
